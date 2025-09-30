@@ -1,5 +1,5 @@
+
 from base.models.cita_model import Cita
-from base.models.usuario_model import usuario
 from flask import render_template, redirect, request, session, Blueprint, flash
 
 bp = Blueprint('citas', __name__, url_prefix='/citas')
@@ -9,9 +9,10 @@ def agregar_cita():
     if 'usuario_id' not in session:
         return redirect('/')
     if not Cita.validar_cita(request.form):
+        flash('La cita no es válida.', 'error')
         return redirect('/citas')
     data = {
-        'cita': request.form['cita'],
+        'citas': request.form['cita'],  # El campo debe coincidir con el modelo y la BD
         'autor_id': session['usuario_id']
     }
     Cita.guardar_cita(data)
@@ -28,10 +29,11 @@ def pagina_editar(id):
         return redirect('/citas')
     if request.method == 'POST':
         if not Cita.validar_cita(request.form):
+            flash('La cita no es válida.', 'error')
             return render_template('edita_cita.html', cita=cita)
         data = {
             'id': id,
-            'cita': request.form['cita']
+            'citas': request.form['cita']
         }
         Cita.actualizar_cita(data)
         flash('¡Cita actualizada!', 'exito')
