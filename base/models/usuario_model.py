@@ -1,7 +1,7 @@
 from base.config.mysqlconnection import connectToMySQL
 import re 
-from flask import flash, session
-from bcrypt import hashpw, gensalt, checkpw
+from flask import flash
+import bcrypt
 
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9]+\.[a-zA-Z]+$')
@@ -97,7 +97,7 @@ class usuario:
             flash("Email no registrado.", 'login')
             is_valid = False 
         else:
-            if not checkpw(usuario['password'].encode('utf-8'), user_in_db.password.encode('utf-8')):
+            if not bcrypt.checkpw(usuario['password'].encode('utf-8'), user_in_db.password.encode('utf-8')):
                 flash("contraseña incorrecta.", 'login')
                 is_valid = False
         return is_valid
