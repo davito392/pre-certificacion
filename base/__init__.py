@@ -9,6 +9,7 @@ def format_date(value, format='%Y-%m-%d'):
         value = datetime.strptime(value, '%Y-%m-%d')
     return value.strftime(format)
 
+def create_app():
     app = Flask(__name__, template_folder='templates', static_folder='static')
     app.config.from_mapping(
         SECRET_KEY='dev',
