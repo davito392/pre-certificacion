@@ -1,0 +1,24 @@
+#
+venv/
+.env/
+.venv/
+env-todo
+
+
+#archivos de python 
+__pycache__/
+*.pyc 
+*.pyo 
+*.pyd 
+
+# archivos comunes de data bases 
+*.sqlite3
+*.db 
+
+
+# archivos de sistemas y editor
+.DS_store 
+Thumbs.db
+.idea/
+.vscode/
+

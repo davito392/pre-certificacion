@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="container mt-4">
+<h1>¡Hola, {{ usuario.nombre|capitalize }}!</h1>
+
+<h2>Citas Disponibles</h2>
+<div class="row">
+{% for cita in citas %}
+<div class="col-md-6 mb-4">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
+<h1>Bienvenido a tu Dashboard</h1>
+
+<h2>Tus Citas</h2>
+<div class="row">
+{% for cita in citas %}
+	<div class="col-md-6 mb-4">
+		<div class="card h-100 shadow-sm">
+			<div class="card-body">
+				<p class="card-text">"{{ cita.cita }}"</p>
+				<p class="text-muted small">Publicado el: {{ cita.creado_en | format_date }}</p>
+				<hr>
+				{% if cita.autor_id == session['usuario_id'] %}
+					<a href="/citas/editar/{{ cita.id }}" class="btn btn-warning btn-sm me-2">Editar</a>
+					<form action="/citas/eliminar/{{ cita.id }}" method="post" style="display:inline;">
+						<button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+					</form>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% else %}
+	<div class="col-12">
+		<p class="alert alert-info">No hay citas disponibles para mostrar.</p>
+	</div>
+{% endfor %}
+</div>
+<div class="row">
+{% if planes_otros %}
+	{% for plan in planes_otros %}
+		<div class="col-md-6 mb-4">
+			<div class="card h-100 shadow-sm">
+				<div class="card-body">
+					<h5 class="card-title">{{ plan.titulo }}</h5>
+					<p>{{ plan.descripcion }}</p>
+					<p class="text-muted small">Fecha: {{ plan.fecha | format_date }}</p>
+					<a href="/planes/{{ plan.id }}" class="btn btn-info btn-sm">Ver Detalle</a>
+					<a href="/planes/unir/{{ plan.id }}" class="btn btn-success btn-sm">Unirse</a>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% else %}
+	<div class="col-12">
+		<p class="alert alert-info">No hay planes de viaje de otros usuarios disponibles.</p>
+	</div>
+{% endif %}
+</div>
+<!-- Se eliminó la sección de planes de viaje -->
+
