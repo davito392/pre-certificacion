@@ -9,7 +9,7 @@ class MySQLConnection:
     def __init__(self, db):
         # Configuración de la conexión, se pueden ajustar el usuario, la contraseña y otros parámetros según sea necesario
         connection = pymysql.connect(host='localhost',
-                                     port=3307,  # Puerto de la base de datos
+                                     port=5307,  # Puerto de la base de datos
                                     user='root',       # Nombre de usuario de la base de datos
                                     password='root',  # Contraseña del usuario de la base de datos
                                     db='esquema_t',             # Nombre de la base de datos
