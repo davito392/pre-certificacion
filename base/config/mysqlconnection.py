@@ -8,17 +8,16 @@ class MySQLConnection:
     # Método constructor que recibe el nombre de la base de datos como parámetro
     def __init__(self, db):
         # Configuración de la conexión, se pueden ajustar el usuario, la contraseña y otros parámetros según sea necesario
-        connection = pymysql.connect(host='localhost',
-                                     port=5307,  # Puerto de la base de datos
-                                    user='root',       # Nombre de usuario de la base de datos
-                                    password='root',  # Contraseña del usuario de la base de datos
-                                    db='esquema_t',             # Nombre de la base de datos
-                                    charset='utf8mb4',  # Codificación de caracteres
-                                    # Los resultados se devuelven como diccionarios
-                                    cursorclass=pymysql.cursors.DictCursor,
-                                    autocommit=True)   # Realiza automáticamente un commit después de cada consulta
-        # Se almacena la conexión establecida en un atributo de la clase
-        self.connection = connection
+        self.connection = pymysql.connect(
+            host='localhost',
+            port=3306,  # Puerto estándar de MySQL
+            user='root',       # Nombre de usuario de la base de datos
+            password='root',  # Contraseña del usuario de la base de datos
+            db=db,             # Nombre de la base de datos dinámico
+            charset='utf8mb4',  # Codificación de caracteres
+            cursorclass=pymysql.cursors.DictCursor,
+            autocommit=True
+        )
 
     # Método para ejecutar consultas SQL en la base de datos
     # Recibe una consulta SQL (query) y opcionalmente datos (data) para consultas parametrizadas
