@@ -10,7 +10,7 @@ class MySQLConnection:
         # Configuración de la conexión, se pueden ajustar el usuario, la contraseña y otros parámetros según sea necesario
         self.connection = pymysql.connect(
             host='localhost',
-            port=3306,  # Puerto estándar de MySQL
+            port=5307,  # Puerto estándar de MySQL
             user='root',       # Nombre de usuario de la base de datos
             password='root',  # Contraseña del usuario de la base de datos
             db=db,             # Nombre de la base de datos dinámico
